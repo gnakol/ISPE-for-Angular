@@ -10,6 +10,7 @@ public class Etudiant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_eleve")
     private int id_etudiant;
 
     @Column(name = "nom")
