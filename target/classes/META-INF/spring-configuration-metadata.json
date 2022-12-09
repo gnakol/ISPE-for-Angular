@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "rsa",
+      "type": "fr.kolie.ispe.catchup.security.RsakeysConfig",
+      "sourceType": "fr.kolie.ispe.catchup.security.RsakeysConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rsa.rsa-private-key",
+      "type": "java.security.interfaces.RSAPrivateKey",
+      "sourceType": "fr.kolie.ispe.catchup.security.RsakeysConfig"
+    },
+    {
+      "name": "rsa.rsa-public-key",
+      "type": "java.security.interfaces.RSAPublicKey",
+      "sourceType": "fr.kolie.ispe.catchup.security.RsakeysConfig"
+    }
+  ],
+  "hints": []
+}

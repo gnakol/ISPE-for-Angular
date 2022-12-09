@@ -48,4 +48,10 @@ public class EtudiantController {
 
         return "Etudiant supprimer avec succès";
     }
+
+    @GetMapping("/getById/{id_etudiant}")
+    public Etudiant etudiant_get_by_id(@Validated @PathVariable int id_etudiant)
+    {
+        return this.etudiantService.getById(id_etudiant);
+    }
 }
