@@ -32,24 +32,27 @@ public class Catchup {
     @Column(name = "etat")
     private String etat;
 
+    // Ici on affiche l'object professeur dans totalité vue qu'il reste une proprieté pour catchup
+    // Après on ignore les repetition de sa liste sinon sa fera une boucle
+    // En gros sur une propriete object le @JsonIgnore faut juste ignorer sa propriete liste
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_professeur")
-    @JsonIgnoreProperties({"catchupSurveillant", "catchupProfesseur"})
+    @JsonIgnoreProperties({"liste_catchups_surveillant", "liste_catchups_professeur"})
     private User professeur;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_surveillant")
-    @JsonIgnoreProperties({"catchupSurveillant", "catchupProfesseur"})
+    @JsonIgnoreProperties({"liste_catchups_surveillant", "liste_catchups_professeur"})
     private User surveillant;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_salle")
-    @JsonIgnoreProperties({"catchup"})
+    @JsonIgnoreProperties({"liste_catchups_salle"})
     private Salle salle;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_matiere")
-    @JsonIgnoreProperties({"catchUp"})
+    @JsonIgnoreProperties({"liste_catchups_matiere"})
     private Matiere matiere;
 
 }

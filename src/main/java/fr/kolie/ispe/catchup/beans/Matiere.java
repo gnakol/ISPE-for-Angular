@@ -1,7 +1,10 @@
 package fr.kolie.ispe.catchup.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,5 +24,9 @@ public class Matiere {
 
     @Column(name = "libelle")
     private String libelle;
+
+    @OneToMany(mappedBy = "matiere", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
+    private List<Catchup> liste_catchups_matiere;
 
 }
