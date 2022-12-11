@@ -9,25 +9,29 @@ import java.sql.Time;
 @Data
 @Entity
 @Table(name = "convocation")
-public class Inscripton {
+public class Inscription {
 
     @EmbeddedId
     private KeyComposite keyComposite;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("id_etudiant")
     @JoinColumn(name="id_eleve", insertable=false, updatable=false)
+    @JsonIgnoreProperties({"liste_inscriptons_etudiant"})
     private Etudiant etudiant;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("id_catchup")
-    @JoinColumn(name="id_catchup", insertable=false, updatable=false)
-    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
-    private Catchup catchUp;
+    @JoinColumn(name="id_rattrapage", insertable=false, updatable=false)
+    @JsonIgnoreProperties({"liste_inscriptions_catchup"})
+    private Catchup catchup;
 
+    @Column(name = "note")
     private float note;
 
+    @Column(name = "present")
     private boolean present;
 
+    @Column(name = "heure_rendu")
     private Time heureRendu;
 }

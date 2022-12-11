@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @Entity
@@ -54,5 +55,9 @@ public class Catchup {
     @JoinColumn(name = "id_matiere")
     @JsonIgnoreProperties({"liste_catchups_matiere"})
     private Matiere matiere;
+
+    @OneToMany(mappedBy = "catchup", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"etudiant", "catchup"})
+    private List<Inscription> liste_inscriptions_catchup;
 
 }

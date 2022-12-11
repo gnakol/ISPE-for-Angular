@@ -11,17 +11,25 @@ import java.io.Serializable;
 public class KeyComposite implements Serializable {
 
     @Column(name = "id_eleve")
-    private int key_catchup;
+    private int key_etudiant;
 
     @Column(name = "id_rattrapage")
-    private int key_inscription;
+    private int key_catchup;
 
     public KeyComposite() {
     }
 
     public KeyComposite(int key_catchup, int key_inscription) {
-        this.key_catchup = key_catchup;
-        this.key_inscription = key_inscription;
+        this.key_etudiant = key_catchup;
+        this.key_catchup = key_inscription;
+    }
+
+    public int getKey_etudiant() {
+        return key_etudiant;
+    }
+
+    public void setKey_etudiant(int key_etudiant) {
+        this.key_etudiant = key_etudiant;
     }
 
     public int getKey_catchup() {
@@ -30,14 +38,6 @@ public class KeyComposite implements Serializable {
 
     public void setKey_catchup(int key_catchup) {
         this.key_catchup = key_catchup;
-    }
-
-    public int getKey_inscription() {
-        return key_inscription;
-    }
-
-    public void setKey_inscription(int key_inscription) {
-        this.key_inscription = key_inscription;
     }
 
     @Override
