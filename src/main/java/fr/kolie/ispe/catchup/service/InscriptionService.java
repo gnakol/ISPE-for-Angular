@@ -1,5 +1,7 @@
 package fr.kolie.ispe.catchup.service;
 
+import fr.kolie.ispe.catchup.beans.Catchup;
+import fr.kolie.ispe.catchup.beans.Etudiant;
 import fr.kolie.ispe.catchup.beans.Inscription;
 import fr.kolie.ispe.catchup.beans.KeyComposite;
 import fr.kolie.ispe.catchup.repository.CatchupRepository;
@@ -7,6 +9,8 @@ import fr.kolie.ispe.catchup.repository.InscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,8 +43,18 @@ public class InscriptionService {
         return this.inscriptionRepository.findById(keyComposite)
                 .map(p-> {
                     p.setNote(inscription.getNote());
-                    p.setPresent(inscription.isPresent());
-                    p.setHeureRendu(inscription.getHeureRendu());
+                    if (p.isPresent())
+                    {
+                        p.setPresent(false);
+                        p.setHeureRendu(null);
+                    }
+                    else
+                    {
+                        p.setPresent(true);
+                        p.setHeureRendu(Time.valueOf(java.time.LocalTime.now()));
+                    }
+                    //p.setPresent(inscription.isPresent());
+                    //p.setHeureRendu(inscription.getHeureRendu());
                     p.setEtudiant(inscription.getEtudiant());
                     p.setCatchup(inscription.getCatchup());
                     return this.inscriptionRepository.save(p);
@@ -63,6 +77,47 @@ public class InscriptionService {
 
         return this.inscriptionRepository.findById(keyComposite).get();
     }
+
+    public List<Inscription> inscriptions_ByCatchupRef(int ref_catchup)
+    {
+        Catchup catchup = this.catchupRepository.findById(ref_catchup).get();
+
+        return this.inscriptionRepository.findByCatchup(catchup);
+    }
+
+    public List<Etudiant> etudiants_present_ByCatchupRef(int ref_catchup)
+    {
+        Catchup catchup = this.catchupRepository.findById(ref_catchup).get();
+
+        List<Inscription> inscriptions = this.inscriptionRepository.findByCatchup(catchup);
+
+        List<Etudiant> etudiants = new ArrayList<>();
+
+        for (int i = 0; i < inscriptions.size(); i++)
+        {
+            if (inscriptions.get(i).isPresent())
+                etudiants.add(inscriptions.get(i).getEtudiant());
+        }
+
+        return etudiants;
+    }
+
+    public List<Etudiant> etudiants_byCatchupRef(int ref_catchup)
+    {
+        Catchup catchup = this.catchupRepository.findById(ref_catchup).get();
+
+        List<Inscription> inscriptions = this.inscriptionRepository.findByCatchup(catchup);
+
+        List<Etudiant> etudiants = new ArrayList<>();
+
+        for (int i = 0; i < inscriptions.size(); i++)
+        {
+            etudiants.add(inscriptions.get(i).getEtudiant());
+        }
+        return etudiants;
+    }
+
+
 
 
 }
