@@ -14,11 +14,10 @@ public interface CatchupRepository extends JpaRepository<Catchup, Integer> {
 
     List<Catchup> findBySurveillant(User surveillant);
 
-    /*List<Catchup> findByEtat(String etat);
+    List<Catchup> findByEtat(String etat);
 
     List<Catchup> findByEtatAndSurveillant(String etat, User surveillant);
 
     List<Catchup> findByEtatAndProfesseur(String etat, User professeur);
 
- */
 }

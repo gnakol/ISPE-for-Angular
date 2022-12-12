@@ -69,4 +69,22 @@ public class CatchupController {
     {
         return this.catchupService.vue_surveillant(id_surveillant);
     }
+
+    @GetMapping("/catchupsByEtat/{etat}")
+    public List<Catchup> catchups_ByEtat(@Validated @PathVariable String etat)
+    {
+        return this.catchupService.catchups_byEtat(etat);
+    }
+
+    @GetMapping("/restantNonEffectuerByProf/{id_professeur}")
+    public List<Catchup> catchups_restantNonEffectuer_byProfesseur(@Validated @PathVariable int id_professeur)
+    {
+        return this.catchupService.catchups_restant_nonEffectuer_ByProf(id_professeur);
+    }
+
+    @GetMapping("/restantNonEffectuerBySurveillant/{id_surveillant}")
+    public List<Catchup> catchups_restantNonEffectuer_BySurveillant(@Validated @PathVariable int id_surveillant)
+    {
+        return this.catchupService.catchups_restant_nonEffectuer_BySurveillant(id_surveillant);
+    }
 }

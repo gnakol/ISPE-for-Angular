@@ -90,6 +90,25 @@ public class CatchupService  {
         return this.catchupRepository.findBySurveillant(surveillant);
     }
 
+    public List<Catchup> catchups_byEtat(String etat)
+    {
+        return this.catchupRepository.findByEtat(etat);
+    }
+
+    public List<Catchup> catchups_restant_nonEffectuer_ByProf(int id_professeur)
+    {
+        User professeur = this.userRepository.findById(id_professeur).get();
+
+        return this.catchupRepository.findByEtatAndProfesseur("Non effectué", professeur);
+    }
+
+
+    public List<Catchup> catchups_restant_nonEffectuer_BySurveillant(int id_surveillant)
+    {
+        User surveillant = this.userRepository.findById(id_surveillant).get();
+
+        return this.catchupRepository.findByEtatAndSurveillant("Non effectué", surveillant);
+    }
 
 
 }
